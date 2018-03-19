@@ -8,7 +8,6 @@
 
 int main()
 {
-    
     char response;
     std::string fname;
     std::string lname;

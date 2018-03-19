@@ -5,7 +5,7 @@
 #include "employee.h"
 #include "sqlite3.h"
 
-int Database::insert(const Employee e) {
+int Database::insert(Employee e) {
     sqlite3 *db;
     const char *filename = "C:\\Sqlite3\\test.db";
     char *errMsg = 0;
@@ -83,13 +83,24 @@ int Database::id_callback(void *data, int count, char **rows, char**) {
     return 1;
 }
 
-std::string Database::generate_query(int id, const Employee e) {
-    std::ostringstream oss;
+std::string Database::generate_query(int id, Employee e) {
     std::string query;
-
+    std::ostringstream oss;
+    /*
+    query.append("INSERT INTO EMPLOYEES VALUES(");
+    query.append(std::to_string(id));
+    query.append(",");
+    query.append("\"");
+    query.append(e.getLastName());
+    query.append("\",");
+    query.append("\"");
+    query.append(e.getFirstName());
+    query.append("\",");
+    query.append(std::to_string(e.getAge()));
+    query.append(");"); */
     oss << "INSERT INTO EMPLOYEES VALUES("<< id << 
-           "," << "\"" >> e.getLastName << "\","<<
-           "\"" << e.getFirstName << "\"," << e.getAge << 
+           "," << "\"" << e.getLastName() << "\","<<
+           "\"" << e.getFirstName() << "\"," << e.getAge() << 
            ");"; 
         
     query = oss.str();

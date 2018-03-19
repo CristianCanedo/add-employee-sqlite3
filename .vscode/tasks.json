@@ -17,8 +17,7 @@
             "group": {
                 "kind": "build",
                 "isDefault": true
-            },
-            "problemMatcher": []
+            }
         },
         {
             "label": "dep",
@@ -28,8 +27,7 @@
                 "-g",
                 "-c",
                 "src/main.cpp",
-                "-o",
-                "main.o"
+                "src/database.cpp"
             ],
             "group": {
                 "kind": "build",
@@ -44,7 +42,8 @@
                 "-o",
                 "main.exe",
                 "sqlite3.o",
-                "main.o"
+                "main.o",
+                "database.o"
             ],
             "group": {
                 "kind": "build",
