@@ -13,6 +13,13 @@ int Database::insert(Employee e) {
     int rc;
     int id = generate_id(); // Generate id based on select count(*)
     
+    /* if generate_id() returns -1
+    ** end the insert call
+    */
+    if (id == -1) {
+        return 1;
+    }
+    
     std::string generatedQuery = generate_query(id, e); // Generated the structured query
     query = generatedQuery.c_str(); // Converting string to char *
 
@@ -51,28 +58,19 @@ int Database::generate_id() {
     if (rc != SQLITE_OK) {
         std::cout << "Failed to establish database connection.\n";
         sqlite3_close(db);
-        return 1;
+        return -1;
     }
     
-    rc = sqlite3_exec(db, query, NULL, 0, &errMsg);
+    rc = sqlite3_exec(db, query, id_callback, &id, &errMsg);
 
     if (rc != SQLITE_OK) {
         fprintf(stderr, "SQL error: %s\n", errMsg);
         sqlite3_free(errMsg);
-        return 1;
+        return -1;
     }
-    else {
-        rc = sqlite3_exec(db, query, id_callback, &id, &errMsg);
-
-        if (rc != SQLITE_OK) {
-            fprintf(stderr, "SQL error: %s\n", errMsg);
-            sqlite3_free(errMsg);
-            return 1;
-        }
-
-        sqlite3_close(db);
-        return id;
-    }
+    
+    sqlite3_close(db);
+    return id;
 }
 
 int Database::id_callback(void *data, int count, char **rows, char**) {
@@ -86,18 +84,7 @@ int Database::id_callback(void *data, int count, char **rows, char**) {
 std::string Database::generate_query(int id, Employee e) {
     std::string query;
     std::ostringstream oss;
-    /*
-    query.append("INSERT INTO EMPLOYEES VALUES(");
-    query.append(std::to_string(id));
-    query.append(",");
-    query.append("\"");
-    query.append(e.getLastName());
-    query.append("\",");
-    query.append("\"");
-    query.append(e.getFirstName());
-    query.append("\",");
-    query.append(std::to_string(e.getAge()));
-    query.append(");"); */
+    
     oss << "INSERT INTO EMPLOYEES VALUES("<< id << 
            "," << "\"" << e.getLastName() << "\","<<
            "\"" << e.getFirstName() << "\"," << e.getAge() << 
