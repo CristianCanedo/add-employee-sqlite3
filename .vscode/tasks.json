@@ -4,16 +4,50 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "echo",
+            "label": "sqlite",
             "type": "shell",
-            "command": "g++",
-            "args":[
+            "command": "gcc",
+            "args": [
+                "-g",
+                "-c",
+                "src/sqlite3.c",
                 "-o",
-                "main.exe",
-                "main.cpp"
+                "sqlite3.o"
             ],
             "group": {
-                "kind":"build",
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "dep",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-g",
+                "-c",
+                "src/main.cpp",
+                "-o",
+                "main.o"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "main",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-o",
+                "main.exe",
+                "sqlite3.o",
+                "main.o"
+            ],
+            "group": {
+                "kind": "build",
                 "isDefault": true
             }
         }
