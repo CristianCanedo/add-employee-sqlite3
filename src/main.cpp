@@ -8,7 +8,10 @@
 
 int main()
 {
+<<<<<<< HEAD
     char response;
+=======
+>>>>>>> master
     std::string fname;
     std::string lname;
     int age;
@@ -19,7 +22,7 @@ int main()
     std::getline(std::cin, fname, '\n');
 
     std::cout << "\nLast Name: ";
-    std::getline(std::cin, lname);
+    std::getline(std::cin, lname, '\n');
 
     std::cout << "\nAge: ";
     std::cin >> age;
