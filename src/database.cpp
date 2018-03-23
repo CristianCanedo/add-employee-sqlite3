@@ -7,7 +7,7 @@
 
 int Database::insert(Employee e) {
     sqlite3 *db;
-    const char *filename = "C:\\Sqlite3\\test.db";
+    const char *filename = "C:\\Sqlite\\test.db";
     char *errMsg = 0;
     const char *query;
     int rc;
@@ -47,7 +47,7 @@ int Database::insert(Employee e) {
 
 int Database::generate_id() {
     sqlite3 *db;
-    const char *filename = "C:\\Sqlite3\\test.db";
+    const char *filename = "C:\\Sqlite\\test.db";
     const char *query = "SELECT COUNT(*) FROM EMPLOYEES";
     char *errMsg = 0;
     int id;
