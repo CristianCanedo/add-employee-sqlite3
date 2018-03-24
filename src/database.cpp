@@ -22,6 +22,7 @@ int Database::insert(const Employee &e) {
     
     std::string generatedQuery = generate_query(id, e); // Generated the structured query
     query = generatedQuery.c_str(); // Converting string to char *
+    std::cout << "In insert, using query " << query << std::endl; // DEBUG
 
     rc = sqlite3_open(filename, &db);
 
@@ -35,6 +36,7 @@ int Database::insert(const Employee &e) {
 
     if (rc != SQLITE_OK) {
         fprintf(stderr, "SQL error: %s\n", errMsg);
+        std::cout << "Found in insert exec" << std::endl; // DEBUG
         sqlite3_free(errMsg);
         return 1;
     }
@@ -65,11 +67,12 @@ int Database::generate_id() {
 
     if (rc != SQLITE_OK) {
         fprintf(stderr, "SQL error: %s\n", errMsg);
+        std::cout << "Found in generate_id" << std::endl; // DEBUG
         sqlite3_free(errMsg);
         return -1;
     }
-    
     sqlite3_close(db);
+    id++;
     return id;
 }
 
@@ -82,15 +85,23 @@ int Database::id_callback(void *data, int count, char **rows, char**) {
 }
 
 std::string Database::generate_query(int id, const Employee &e) {
-    std::string query;
+    std::string query = "INSERT INTO EMPLOYEES VALUES(";
+    query.append(std::to_string(id));         // INSERT INTO EMPLOYEES VALUES(id
+    query.append(", \"");                     // INSERT INTO EMPLOYEES VALUES(id, "
+    query.append(e.getLastName());            // INSERT INTO EMPLOYEES VALUES(id, "name
+    query.append("\", \"");                   // INSERT INTO EMPLOYEES VALUES(id, "name", "
+    query.append(e.getFirstName());           // INSERT INTO EMPLOYEES VALUES(id, "name", "name
+    query.append("\", ");                     // INSERT INTO EMPLOYEES VALUES(id, "name", "name", 
+    query.append(std::to_string(e.getAge())); // INSERT INTO EMPLOYEES VALUES(id, "name", "name", age
+    query.append(");");                       // INSERT INTO EMPLOYEES VALUES(id, "name", "name", age);
+    return query;
+    /*
     std::ostringstream oss;
     
     oss << "INSERT INTO EMPLOYEES VALUES("<< id << 
            "," << "\"" << e.getLastName() << "\","<<
            "\"" << e.getFirstName() << "\"," << e.getAge() << 
-           ");"; 
-        
-    query = oss.str();
+           ");"; */
 }
 
 int Database::insert_callback(void *notused, int argc, char **argv, char **azColName) {
