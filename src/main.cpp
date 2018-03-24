@@ -25,10 +25,11 @@ void createEmployee() {
     std::cout << "---------------------------" << std::endl;
     std::cout << "First Name: ";
     std::getline(std::cin, fname, '\n');
-    std::cout << "\nLast Name: ";
+    std::cout << "Last Name: ";
     std::getline(std::cin, lname, '\n');
-    std::cout << "\nAge: " << std::endl;
+    std::cout << "Age: ";
     std::cin >> age;
+    std::cout << std::endl;
 
     Employee e(fname, lname, age);
 
