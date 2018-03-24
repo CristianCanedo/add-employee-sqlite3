@@ -11,8 +11,8 @@ class Database {
 
     static int id_callback(void*, int, char**, char**);
     static int generate_id();
-    static int insert(Employee e);
-    static std::string generate_query(int id, Employee e);
+    static int insert(const Employee &e);
+    static std::string generate_query(int id, const Employee &e);
     static int insert_callback(void*, int, char**, char**);
 };
 

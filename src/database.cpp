@@ -5,7 +5,7 @@
 #include "employee.h"
 #include "sqlite3.h"
 
-int Database::insert(Employee e) {
+int Database::insert(const Employee &e) {
     sqlite3 *db;
     const char *filename = "C:\\Sqlite\\test.db";
     char *errMsg = 0;
@@ -81,7 +81,7 @@ int Database::id_callback(void *data, int count, char **rows, char**) {
     return 1;
 }
 
-std::string Database::generate_query(int id, Employee e) {
+std::string Database::generate_query(int id, const Employee &e) {
     std::string query;
     std::ostringstream oss;
     
