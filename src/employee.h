@@ -13,6 +13,13 @@ class Employee {
             :_firstname(fn), _lastname(ln), _age(a) {}
     ~Employee() {}
 
+    void create();
+    void setFirstName();
+    void setLastName();
+    void setAge();
+    bool isNameValid(const std::string &name);
+    bool isAgeValid(int age);
+
     std::string getFirstName() const { return _firstname; }
     std::string getLastName() const { return _lastname; }
     int getAge() const { return _age; }

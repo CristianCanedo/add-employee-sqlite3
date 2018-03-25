@@ -17,21 +17,8 @@ int main()
 }
 
 void createEmployee() {
-    std::string fname;
-    std::string lname;
-    int age;
-
-    std::cout << "****Create New Employee****" << std::endl;
-    std::cout << "---------------------------" << std::endl;
-    std::cout << "First Name: ";
-    std::getline(std::cin, fname, '\n');
-    std::cout << "Last Name: ";
-    std::getline(std::cin, lname, '\n');
-    std::cout << "Age: ";
-    std::cin >> age;
-    std::cout << std::endl;
-
-    Employee e(fname, lname, age);
+    Employee e;
+    e.create();
 
     prepareForStorage(e);
 }
