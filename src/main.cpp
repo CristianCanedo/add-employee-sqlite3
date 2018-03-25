@@ -68,6 +68,6 @@ void prepareForStorage(const Employee &e) {
 }
 
 void insertInDatabase(const Employee &e) {
-    std::cout << "Preparing to add record to database..." << std::endl;
+    std::cout << "Preparing to add record to database...\n" << std::endl;
     Database::insert(e);
 }
