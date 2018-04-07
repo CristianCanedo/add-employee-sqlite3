@@ -24,11 +24,11 @@ void createEmployee() {
 }
 
 void prepareForStorage(const Employee &e) {
-    char res;
+    char response;
 
     while (true) {
         std::cout << "Add to database? (y/n):";
-        std::cin >> res;
+        std::cin >> response;
 
         if (std::cin.fail()) {
             std::cerr << "Unable to read input. Try again." << std::endl;

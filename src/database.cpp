@@ -13,15 +13,13 @@ int Database::insert(const Employee &e) {
     int rc;
     int id = generate_id(); // Generate id based on select count(*)
     
-    /* if generate_id() returns -1
-    ** end the insert call
-    */
+    // if generate_id() returns -1 end the insert call 
     if (id == -1) {
         return 1;
     }
     
     std::string generatedQuery = generate_query(id, e); // Generated the structured query
-    query = generatedQuery.c_str(); // Converting string to char *
+    query = generatedQuery.c_str();                     // Converting string to char *
 
     rc = sqlite3_open(filename, &db);
 
